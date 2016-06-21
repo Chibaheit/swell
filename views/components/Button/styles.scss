@@ -1,0 +1,19 @@
+.button {
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 2px;
+  cursor: pointer;
+  padding: 4px 15px;
+  background-color: rgba(0, 0, 0, 0);
+  border: solid rgba(33, 33, 33, 0.5) 1px;
+  transition: all .7s;
+  &:hover, &:focus, &:active {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: rgba(33, 33, 33, 0.5);
+  }
+  font: 16px/1.4 "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
+}
+
+.large {
+  padding: 10px 50px;
+  border-radius: 4px;
+}
