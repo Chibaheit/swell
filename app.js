@@ -30,6 +30,7 @@ const redisStore = connectRedis(expressSession)
 const app = express()
 app.locals.ENV = env
 app.locals.ENV_DEVELOPMENT = (env === 'development')
+app.set('query parser', 'simple')
 
 const session = expressSession({
   name: 'sweely.sess',

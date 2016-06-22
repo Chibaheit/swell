@@ -1,0 +1,20 @@
+.card {
+  display: flex;
+  padding: 7px;
+  border: solid #F2F2F2;
+  border-bottom-width: 1px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  cursor: pointer;
+  color: black;
+  .avatar {
+    margin-right: 15px;
+  }
+  .username {
+    font-size: 13px;
+    line-height: 18px;
+    margin: auto;
+    margin-left: 0;
+  }
+}

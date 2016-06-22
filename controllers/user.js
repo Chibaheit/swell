@@ -29,7 +29,8 @@ router.post('/user/signup', async (req, res) => {
   const user = new User({
     email: _.toLower(req.body.email),
     password: req.body.password,
-    username: _.toLower(req.body.username)
+    username: _.toLower(req.body.username),
+    friends: [{"default": []}]
   })
   await user.save()
   req.session.user = {
@@ -63,6 +64,25 @@ router.post('/user/login', async (req, res) => {
     username: user.username
   }
   return res.success()
+})
+
+router.get('/user', async (req, res) => {
+  if (req.session.user) {
+    const user = await User.findById(req.session.user._id)
+      .select('username friends').exec()
+    return res.success({ user })
+  } else {
+    return res.fail()
+  }
+})
+
+router.get('/user/search', async (req, res) => {
+  if (!req.query.q || !_.isString(req.query.q)) {
+    return res.bad()
+  }
+  const users = await User.find({ username: new RegExp(req.query.q, 'i') })
+    .select('username').exec()
+  return res.success({ users })
 })
 
 export default router

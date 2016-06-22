@@ -12,6 +12,10 @@ const LOGIN_FAIL = 'sweely/user/LOGIN_FAIL'
 const SHOW_SIGNUP = 'sweely/user/SHOW_SIGNUP'
 const SHOW_LOGIN = 'sweely/user/SHOW_LOGIN'
 
+const GET_PROFILE = 'sweely/user/GET_PROFILE'
+const GET_PROFILE_SUCCESS = 'sweely/user/GET_PROFILE_SUCCESS'
+const GET_PROFILE_FAIL = 'sweely/user/GET_PROFILE_FAIL'
+
 const initialState = {
   activeForm: 'SignupForm'
 }
@@ -34,6 +38,11 @@ export const login = data => ({
   promise: _ => _.post('/api/user/login', data)
 })
 
+export const getProfile = () => ({
+  types: [GET_PROFILE, GET_PROFILE_SUCCESS, GET_PROFILE_FAIL],
+  promise: _ => _.get('/api/user')
+})
+
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case SHOW_SIGNUP:
@@ -52,6 +61,11 @@ export default function reducer(state = initialState, action = {}) {
         store.dispatch(push('/'))
       }, )
       return state
+    case GET_PROFILE_SUCCESS:
+      return {
+        ...state,
+        ...action.result.user
+      }
     default:
       return state
   }
